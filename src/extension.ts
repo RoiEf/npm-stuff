@@ -47,8 +47,10 @@ export function activate(context: vscode.ExtensionContext) {
               }
             }
           } else {
-            // check if we are in a dependencies block
-            shouldCheckForDependency = /"(.*?)dependencies"/i.test(line.text);
+            // check if we are in a dependencies or overrides block
+            shouldCheckForDependency =
+              /"(.*?)dependencies"/i.test(line.text) ||
+              /"(.*?)overrides"/i.test(line.text);
           }
 
           lineIndex += 1;
