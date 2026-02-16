@@ -10,15 +10,22 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:json"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "npm-stuff.helloWorld",
-        "title": "Hello World"
+    "configuration": {
+      "type": "object",
+      "title": "NPM Stuffs Configuration",
+      "properties": {
+        "npm-stuff.registryUrl": {
+          "type": "string",
+          "default": "https://www.npmjs.com/package/",
+          "description": "Registry URL to be used for package link."
+        }
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
