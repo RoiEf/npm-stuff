@@ -4,6 +4,10 @@
   "description": "",
   "version": "0.0.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RoiEf/npm-stuff.git"
+  },
   "engines": {
     "vscode": "^1.109.0"
   },
