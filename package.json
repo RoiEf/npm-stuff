@@ -3,6 +3,7 @@
   "displayName": "npm Stuff",
   "description": "",
   "version": "0.0.1",
+  "publisher": "RoiEfrati",
   "type": "module",
   "repository": {
     "type": "git",
