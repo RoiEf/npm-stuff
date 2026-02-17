@@ -22,12 +22,22 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "NPM Stuff Configuration",
+      "title": "NpmStuff",
       "properties": {
+        "npm-stuff.dependenciesLinks.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable links for dependencies in package.json."
+        },
         "npm-stuff.registryUrl": {
           "type": "string",
           "default": "https://www.npmjs.com/package/",
           "description": "Registry URL to be used for package link."
+        },
+        "npm-stuff.dependenciesAlerts.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable alerts if dependencies in package.json changed after git pull."
         }
       }
     }

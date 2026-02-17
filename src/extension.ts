@@ -15,7 +15,7 @@ function buildLink(
     lineIndex,
     endCharacter,
   );
-  const registryUrl =
+  const registryUrl: string =
     vscode.workspace.getConfiguration("npm-stuff").registryUrl;
   const linkUri = vscode.Uri.parse(`${registryUrl}${packageName}`);
   return new vscode.DocumentLink(linkRange, linkUri);
@@ -23,10 +23,17 @@ function buildLink(
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const enableLinks: boolean =
+    vscode.workspace.getConfiguration("npm-stuff").dependenciesLinks.enabled;
+
   const disposable = vscode.languages.registerDocumentLinkProvider(
     { language: "json", pattern: "**/package.json" },
     {
       provideDocumentLinks(document) {
+        if (!enableLinks) {
+          return;
+        }
+
         const links = [];
         let lineIndex = 0;
         let shouldCheckForDependency = false;
