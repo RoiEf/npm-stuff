@@ -40,3 +40,7 @@ This extension contributes the following setting:
 ### Upcoming
 
 - Planned: npm install detection after git pull.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). See the LICENSE file for details. No liability or warranty is provided.
