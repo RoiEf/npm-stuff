@@ -7,7 +7,5 @@
     "out": true // set this to false to include "out" folder in search results
   },
   // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-  "typescript.tsc.autoDetect": "off",
-  "snyk.advanced.organization": "6b6ba8eb-49d8-425f-8130-85795bd7b7db",
-  "snyk.advanced.autoSelectOrganization": true
+  "typescript.tsc.autoDetect": "off"
 }
