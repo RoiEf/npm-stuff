@@ -30,6 +30,8 @@ export function activate(context: vscode.ExtensionContext) {
         const links = [];
         let lineIndex = 0;
         let shouldCheckForDependency = false;
+        let shouldCheckForOverrides = false;
+        let shouldCheckForPeerDependencies = false;
 
         while (lineIndex < document.lineCount) {
           const line = document.lineAt(lineIndex);
@@ -46,11 +48,29 @@ export function activate(context: vscode.ExtensionContext) {
                 links.push(buildLink(line, lineIndex, matches[1]));
               }
             }
+          } else if (shouldCheckForOverrides) {
+            // no need to check for overrides if block ended
+            if (line.text.includes("}")) {
+              if (shouldCheckForPeerDependencies) {
+                shouldCheckForPeerDependencies = false;
+              } else {
+                shouldCheckForOverrides = false;
+              }
+            } else {
+              // check if we are in a peerDependencies block
+              shouldCheckForPeerDependencies = /: \{/.test(line.text);
+
+              // find dependency
+              const matches = line.text.match(/"(.*?)"/);
+
+              if (matches) {
+                links.push(buildLink(line, lineIndex, matches[1]));
+              }
+            }
           } else {
             // check if we are in a dependencies or overrides block
-            shouldCheckForDependency =
-              /"(.*?)dependencies"/i.test(line.text) ||
-              /"(.*?)overrides"/i.test(line.text);
+            shouldCheckForDependency = /"(.*?)dependencies"/i.test(line.text);
+            shouldCheckForOverrides = /"(.*?)overrides"/i.test(line.text);
           }
 
           lineIndex += 1;
