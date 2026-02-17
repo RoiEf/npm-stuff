@@ -16,7 +16,8 @@ function buildLink(
     endCharacter,
   );
   const registryUrl: string =
-    vscode.workspace.getConfiguration("npm-stuff").registryUrl;
+    vscode.workspace.getConfiguration("npm-stuff").dependenciesLinks
+      .registryUrl;
   const linkUri = vscode.Uri.parse(`${registryUrl}${packageName}`);
   return new vscode.DocumentLink(linkRange, linkUri);
 }

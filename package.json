@@ -26,17 +26,17 @@
       "properties": {
         "npm-stuff.dependenciesLinks.enabled": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Enable or disable links for dependencies in package.json."
         },
-        "npm-stuff.registryUrl": {
+        "npm-stuff.dependenciesLinks.registryUrl": {
           "type": "string",
           "default": "https://www.npmjs.com/package/",
           "description": "Registry URL to be used for package link."
         },
         "npm-stuff.dependenciesAlerts.enabled": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Enable or disable alerts if dependencies in package.json changed after git pull."
         }
       }
