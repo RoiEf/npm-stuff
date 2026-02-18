@@ -48,6 +48,36 @@ function hasTopLevelKeys(value: JsonObject): boolean {
   return Object.keys(value).length > 0;
 }
 
+function hasMeaningfulOverrideValue(value: unknown): boolean {
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return false;
+    }
+
+    return value.some((item) => hasMeaningfulOverrideValue(item));
+  }
+
+  if (!isJsonObject(value)) {
+    return value !== undefined;
+  }
+
+  const entries = Object.entries(value);
+
+  if (entries.length === 0) {
+    return false;
+  }
+
+  return entries.some(([, nestedValue]) =>
+    hasMeaningfulOverrideValue(nestedValue),
+  );
+}
+
+function hasMeaningfulOverrides(overrides: JsonObject): boolean {
+  return Object.values(overrides).some((value) =>
+    hasMeaningfulOverrideValue(value),
+  );
+}
+
 function baselineStorageKey(workspaceFolder: vscode.WorkspaceFolder): string {
   return `${BASELINE_STORAGE_PREFIX}${workspaceFolder.uri.toString()}`;
 }
@@ -122,7 +152,7 @@ export async function readDesiredDependencyState(
     const hasDependencyEntries =
       hasTopLevelKeys(normalizedSections.dependencies) ||
       hasTopLevelKeys(normalizedSections.devDependencies) ||
-      hasTopLevelKeys(normalizedSections.overrides);
+      hasMeaningfulOverrides(normalizedSections.overrides);
 
     return {
       signature: JSON.stringify(sortJson(normalizedSections)),
