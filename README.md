@@ -5,12 +5,13 @@ npm-stuff is a Visual Studio Code extension inspired by [npm-dependency-links](h
 ## Features
 
 - Turns dependencies in `package.json` into clickable links. Clicking a link with CMD/Ctrl opens the npm page for the dependency package.
+- Shows a project-level status bar alert when dependency drift suggests `npm install` is required after git sync/branch changes.
 - Not all functionality from npm-dependency-links is implemented; this extension is evolving independently.
 - Unique features and improvements may be added over time.
 
 ## Planned Features
 
-- Detect when `npm install` is needed after syncing with git (e.g., after running `git pull` if dependencies have changed).
+- Detect when a Prisma ORM database migration is needed after `git pull`.
 - Additional enhancements and features are planned—stay tuned!
 
 ## Requirements
@@ -21,9 +22,12 @@ npm-stuff is a Visual Studio Code extension inspired by [npm-dependency-links](h
 
 ## Extension Settings
 
-This extension contributes the following setting:
+This extension contributes the following settings:
 
-- `NPM Stuff Configuration: registryUrl` (default: `https://www.npmjs.com/package/`): Registry URL to be used for package links.
+- `npm-stuff.dependenciesLinks.enabled` (default: `true`): Enable or disable links for dependencies in `package.json`.
+- `npm-stuff.dependenciesLinks.registryUrl` (default: `https://www.npmjs.com/package/`): Registry URL used for package links.
+- `npm-stuff.dependenciesAlerts.enabled` (default: `true`): Enable or disable project-level alerts when dependencies changed after git sync.
+- `npm-stuff.dependenciesAlerts.alwaysShow.enable` (default: `true`): Show the project dependency status item even when no out-of-sync warning is active.
 
 ## Known Issues
 
@@ -35,8 +39,8 @@ For the full release history, see [CHANGELOG.md](./CHANGELOG.md).
 
 ### Latest Releases
 
-- **0.0.1 (2026-02-17):** Initial release with clickable npm package links, including support for dependencies in `overrides`.
-- **0.0.4 (2026-02-18):** Updated VS Code engine requirement to `^1.107.0` for compatibility with current Google Antigravity.
+- **0.0.6 (2026-02-18):** Added project-level `npm install` drift alerts with status bar and alert commands.
+- **0.0.5 (2026-02-18):** Updated VS Code engine requirement to `^1.107.0` for compatibility with current Google Antigravity.
 
 ## License
 
