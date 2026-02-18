@@ -10,7 +10,7 @@
     "url": "https://github.com/RoiEf/npm-stuff.git"
   },
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.107.0"
   },
   "categories": [
     "Other"
