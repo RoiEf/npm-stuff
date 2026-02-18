@@ -6,16 +6,17 @@ npm-stuff is a Visual Studio Code extension inspired by [npm-dependency-links](h
 
 - Turns dependencies in `package.json` into clickable links. Clicking a link with CMD/Ctrl opens the npm page for the dependency package.
 - Shows a project-level status bar alert when dependency drift suggests `npm install` is required after git sync/branch changes.
+- Supports migration alerts only when `prisma` is present in dependencies/devDependencies and the configured migrations folder exists; currently Prisma ORM is the only implemented migration provider.
 - Not all functionality from npm-dependency-links is implemented; this extension is evolving independently.
 - Unique features and improvements may be added over time.
 
 ## Planned Features
 
-- Detect when a Prisma ORM database migration is needed after `git pull`.
-- Additional enhancements and features are planned—stay tuned!
+- Additional enhancements and support for other ORMs may be added in the future based on requests.
 
 ## Requirements
 
+- These requirements apply only if you want to build/compile the extension from source.
 - Node.js 24 is required.
 - Extension uses ESM modules.
 - Migrated from yo/generator-code template.
@@ -28,8 +29,8 @@ This extension contributes the following settings:
 - `npm-stuff.dependenciesLinks.enabled` (default: `true`): Enable or disable links for dependencies in `package.json`.
 - `npm-stuff.dependenciesLinks.registryUrl` (default: `https://www.npmjs.com/package/`): Registry URL used for package links.
 - `npm-stuff.dependenciesAlerts.enabled` (default: `true`): Enable or disable project-level alerts when dependencies changed after git sync.
-- `npm-stuff.migrationAlerts.enabled` (default: `false`): Enable migration alerts (currently validates migration folder availability).
-- `npm-stuff.migrationAlerts.migrationsFolder` (default: `prisma/migrations/`): Workspace-relative path of the migrations directory.
+- `npm-stuff.migrationAlerts.enabled` (default: `true`): Enable migration alerts for projects that include `prisma` in `dependencies` or `devDependencies`.
+- `npm-stuff.migrationAlerts.migrationsFolder` (default: `prisma/migrations/`): Workspace-relative migrations folder path; empty values are treated as missing/disabled.
 
 ## Known Issues
 

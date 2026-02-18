@@ -58,12 +58,12 @@
         "npm-stuff.migrationAlerts.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show a warning when there are DB migrations to be applied."
+          "description": "Enable migration alerts only for projects that include prisma in dependencies or devDependencies."
         },
         "npm-stuff.migrationAlerts.migrationsFolder": {
           "type": "string",
           "default": "prisma/migrations/",
-          "description": "Default folder to look for DB migrations in."
+          "description": "Workspace-relative migrations folder to monitor; empty values are treated as missing/disabled."
         }
       }
     }
