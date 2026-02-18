@@ -16,10 +16,21 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:json"
+    "onLanguage:json",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "npm-stuff.dependenciesAlerts.runInstall",
+        "title": "npm Stuff: Run npm install"
+      },
+      {
+        "command": "npm-stuff.dependenciesAlerts.refresh",
+        "title": "npm Stuff: Refresh Dependencies Alert"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "NpmStuff",
