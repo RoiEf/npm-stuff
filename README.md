@@ -31,15 +31,12 @@ This extension contributes the following setting:
 
 ## Release Notes
 
-### 0.0.1
+For the full release history, see [CHANGELOG.md](./CHANGELOG.md).
 
-- Initial release based on npm-dependency-links.
+### Latest Releases
 
-- Migrated to Node.js 24 and ESM. Added dependency link feature.
-
-### Upcoming
-
-- Planned: npm install detection after git pull.
+- **0.0.1 (2026-02-17):** Initial release with clickable npm package links, including support for dependencies in `overrides`.
+- **0.0.4 (2026-02-18):** Updated VS Code engine requirement to `^1.107.0` for compatibility with current Google Antigravity.
 
 ## License
 
