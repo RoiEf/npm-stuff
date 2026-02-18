@@ -59,11 +59,6 @@
           "type": "boolean",
           "default": true,
           "description": "Enable migration alerts only for projects that include prisma in dependencies or devDependencies."
-        },
-        "npm-stuff.migrationAlerts.migrationsFolder": {
-          "type": "string",
-          "default": "prisma/migrations/",
-          "description": "Workspace-relative migrations folder to monitor; empty values are treated as missing/disabled."
         }
       }
     }

@@ -8,13 +8,6 @@ const MIGRATION_ALERT_KEY = "migration-alerts";
 
 type JsonObject = Record<string, unknown>;
 
-function normalizeRelativeFolder(folder: string): string {
-  return folder
-    .replace(/^[/\\]+/, "")
-    .replace(/[/\\]+$/, "")
-    .trim();
-}
-
 function isJsonObject(value: unknown): value is JsonObject {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -48,15 +41,6 @@ async function hasPrismaDependency(
   }
 }
 
-async function folderExists(folderUri: vscode.Uri): Promise<boolean> {
-  try {
-    const stat = await vscode.workspace.fs.stat(folderUri);
-    return stat.type === vscode.FileType.Directory;
-  } catch {
-    return false;
-  }
-}
-
 export function registerMigrationAlerts(
   statusBar: SharedAlertsStatusBar,
 ): vscode.Disposable {
@@ -75,24 +59,9 @@ export function registerMigrationAlerts(
 
     if (!workspaceFolder) {
       statusBar.setAlert(MIGRATION_ALERT_KEY, {
-        text: "$(warning) migrations folder missing",
+        text: "$(warning) migration alerts unavailable",
         tooltip:
           "npm-stuff: Migration alerts are enabled but no workspace folder is open. Feature disabled.",
-        severity: "warning",
-        priority: 95,
-      });
-      return;
-    }
-
-    const relativeFolder = normalizeRelativeFolder(
-      migrationConfig.migrationsFolder,
-    );
-
-    if (!relativeFolder) {
-      statusBar.setAlert(MIGRATION_ALERT_KEY, {
-        text: "$(warning) migrations folder missing",
-        tooltip:
-          "npm-stuff: Migration alerts are enabled but migrationsFolder is empty in settings. Feature disabled.",
         severity: "warning",
         priority: 95,
       });
@@ -112,26 +81,11 @@ export function registerMigrationAlerts(
       return;
     }
 
-    const migrationFolderUri = vscode.Uri.joinPath(
-      workspaceFolder.uri,
-      relativeFolder,
-    );
-    const migrationsFolderExists = await folderExists(migrationFolderUri);
-
-    if (!migrationsFolderExists) {
-      statusBar.setAlert(MIGRATION_ALERT_KEY, {
-        text: "$(warning) migrations folder missing",
-        tooltip: `npm-stuff: Migration alerts disabled because folder "${relativeFolder}" was not found in the workspace.`,
-        severity: "warning",
-        priority: 95,
-      });
-      return;
-    }
-
     if (sharedConfig.alwaysShowAlertsEnabled) {
       statusBar.setAlert(MIGRATION_ALERT_KEY, {
         text: "$(check) migrations monitored",
-        tooltip: `npm-stuff: Migration alerts are enabled and monitoring "${relativeFolder}".`,
+        tooltip:
+          "npm-stuff: Migration alerts are enabled. Prisma status checks will determine migration state.",
         severity: "success",
         priority: 5,
       });

@@ -6,7 +6,7 @@ npm-stuff is a Visual Studio Code extension inspired by [npm-dependency-links](h
 
 - Turns dependencies in `package.json` into clickable links. Clicking a link with CMD/Ctrl opens the npm page for the dependency package.
 - Shows a project-level status bar alert when dependency drift suggests `npm install` is required after git sync/branch changes.
-- Supports migration alerts only when `prisma` is present in dependencies/devDependencies and the configured migrations folder exists; currently Prisma ORM is the only implemented migration provider.
+- Supports migration alerts only when `prisma` is present in dependencies/devDependencies; currently Prisma ORM is the only implemented migration provider and migration status relies on Prisma tooling.
 - Not all functionality from npm-dependency-links is implemented; this extension is evolving independently.
 - Unique features and improvements may be added over time.
 
@@ -30,7 +30,6 @@ This extension contributes the following settings:
 - `npm-stuff.dependenciesLinks.registryUrl` (default: `https://www.npmjs.com/package/`): Registry URL used for package links.
 - `npm-stuff.dependenciesAlerts.enabled` (default: `true`): Enable or disable project-level alerts when dependencies changed after git sync.
 - `npm-stuff.migrationAlerts.enabled` (default: `true`): Enable migration alerts for projects that include `prisma` in `dependencies` or `devDependencies`.
-- `npm-stuff.migrationAlerts.migrationsFolder` (default: `prisma/migrations/`): Workspace-relative migrations folder path; empty values are treated as missing/disabled.
 
 ## Known Issues
 
