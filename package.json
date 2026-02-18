@@ -38,22 +38,22 @@
         "npm-stuff.dependenciesLinks.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable links for dependencies in package.json."
+          "description": "Enable or disable clickable links for dependencies in package.json."
         },
         "npm-stuff.dependenciesLinks.registryUrl": {
           "type": "string",
           "default": "https://www.npmjs.com/package/",
-          "description": "Registry URL to be used for package link."
+          "description": "Registry URL used for package links."
         },
         "npm-stuff.dependenciesAlerts.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable alerts if dependencies in package.json changed after git pull."
+          "description": "Enable or disable project-level alerts when dependencies in package.json change after git sync."
         },
         "npm-stuff.dependenciesAlerts.alwaysShow.enable": {
           "type": "boolean",
           "default": true,
-          "description": "Show dependency alerts project status item even when no out-of-sync warning is active."
+          "description": "Show the project dependency status item even when no out-of-sync warning is active."
         }
       }
     }
