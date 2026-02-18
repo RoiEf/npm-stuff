@@ -8,11 +8,10 @@ import {
   readDesiredDependencyState,
   setStoredBaselineSignature,
 } from "./state.js";
-import {
-  createDependencyAlertsStatusBar,
-  renderDependencyAlertsStatus,
-} from "./statusBar.js";
+import { renderDependencyAlertsStatus } from "./statusBar.js";
 import { type DependencyAlertTrigger } from "./types.js";
+import { type SharedAlertsStatusBar } from "../shared/alertsStatusBar.js";
+import { getSharedAlertsConfig } from "../shared/config.js";
 
 const RUN_INSTALL_COMMAND = "npm-stuff.dependenciesAlerts.runInstall";
 const REFRESH_COMMAND = "npm-stuff.dependenciesAlerts.refresh";
@@ -35,17 +34,17 @@ interface GitExtensionExports {
 
 export function registerDependencyAlerts(
   context: vscode.ExtensionContext,
+  statusBar: SharedAlertsStatusBar,
 ): vscode.Disposable {
   const disposables: vscode.Disposable[] = [];
-  const statusBarItem = createDependencyAlertsStatusBar();
   const workspaceFolder = getPrimaryWorkspaceFolder();
   let evaluateTimeout: NodeJS.Timeout | undefined;
 
-  disposables.push(statusBarItem);
-
   if (!workspaceFolder) {
-    const config = getDependencyAlertsConfig();
-    renderDependencyAlertsStatus(statusBarItem, config, {
+    const dependencyConfig = getDependencyAlertsConfig();
+    const sharedConfig = getSharedAlertsConfig();
+
+    renderDependencyAlertsStatus(statusBar, dependencyConfig, sharedConfig, {
       status: "unknown",
       reason: "Open a workspace folder to enable project dependency alerts.",
     });
@@ -56,10 +55,11 @@ export function registerDependencyAlerts(
   const runEvaluation = async (
     trigger: DependencyAlertTrigger,
   ): Promise<void> => {
-    const config = getDependencyAlertsConfig();
+    const dependencyConfig = getDependencyAlertsConfig();
+    const sharedConfig = getSharedAlertsConfig();
 
-    if (!config.enabled) {
-      renderDependencyAlertsStatus(statusBarItem, config, {
+    if (!dependencyConfig.enabled) {
+      renderDependencyAlertsStatus(statusBar, dependencyConfig, sharedConfig, {
         status: "unknown",
         reason: "Dependency alerts are disabled in settings.",
       });
@@ -91,7 +91,12 @@ export function registerDependencyAlerts(
       );
     }
 
-    renderDependencyAlertsStatus(statusBarItem, config, evaluation);
+    renderDependencyAlertsStatus(
+      statusBar,
+      dependencyConfig,
+      sharedConfig,
+      evaluation,
+    );
   };
 
   const scheduleEvaluation = (trigger: DependencyAlertTrigger): void => {
@@ -151,7 +156,10 @@ export function registerDependencyAlerts(
 
   const configChangeDisposable = vscode.workspace.onDidChangeConfiguration(
     (event) => {
-      if (event.affectsConfiguration("npm-stuff.dependenciesAlerts")) {
+      if (
+        event.affectsConfiguration("npm-stuff.dependenciesAlerts") ||
+        event.affectsConfiguration("npm-stuff.alwaysShowAlerts.enabled")
+      ) {
         scheduleEvaluation("config-change");
       }
     },

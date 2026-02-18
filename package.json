@@ -33,8 +33,13 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "NpmStuff",
+      "title": "npm Stuff",
       "properties": {
+        "npm-stuff.alwaysShowAlerts.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show npm-stuff status bar alerts even when no active warning is present."
+        },
         "npm-stuff.dependenciesLinks.enabled": {
           "type": "boolean",
           "default": true,
@@ -50,10 +55,15 @@
           "default": true,
           "description": "Enable or disable project-level alerts when dependencies in package.json change after git sync."
         },
-        "npm-stuff.dependenciesAlerts.alwaysShow.enable": {
+        "npm-stuff.migrationAlerts.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show the project dependency status item even when no out-of-sync warning is active."
+          "description": "Show a warning when there are DB migrations to be applied."
+        },
+        "npm-stuff.migrationAlerts.migrationsFolder": {
+          "type": "string",
+          "default": "prisma/migrations/",
+          "description": "Default folder to look for DB migrations in."
         }
       }
     }
