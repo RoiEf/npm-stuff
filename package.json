@@ -36,8 +36,13 @@
         },
         "npm-stuff.dependenciesAlerts.enabled": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Enable or disable alerts if dependencies in package.json changed after git pull."
+        },
+        "npm-stuff.dependenciesAlerts.alwaysShow.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show dependency alerts project status item even when no out-of-sync warning is active."
         }
       }
     }
