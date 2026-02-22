@@ -36,7 +36,9 @@ export function collectDependencyNameMatches(
           shouldCheckForOverrides = false;
         }
       } else {
-        shouldCheckForPeerDependencies = /: \{/.test(line.text);
+        if (/: \{/.test(line.text)) {
+          shouldCheckForPeerDependencies = true;
+        }
 
         const lineMatches = line.text.match(/"(.*?)"/);
 
