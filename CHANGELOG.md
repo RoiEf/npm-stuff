@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Planned: Detect when a Prisma ORM database migration is needed after `git pull`.
 
+## [0.0.7] - 2026-02-22
+
+### Fixed
+
+- Fixed a bug where multiple nested override groups in `overrides` were not fully parsed; entries after the first nested group (e.g. a second `{ }` block) were silently dropped and not shown as clickable links.
+
 ## [0.0.6] - 2026-02-18
 
 ### Added

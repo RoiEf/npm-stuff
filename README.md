@@ -41,8 +41,8 @@ For the full release history, see [CHANGELOG.md](./CHANGELOG.md).
 
 ### Latest Releases
 
+- **0.0.7 (2026-02-22):** Fixed parser dropping entries after the first nested override group in `overrides`.
 - **0.0.6 (2026-02-18):** Added project-level `npm install` drift alerts with status bar and alert commands.
-- **0.0.5 (2026-02-18):** Updated VS Code engine requirement to `^1.107.0` for compatibility with current Google Antigravity.
 
 ## License
 
